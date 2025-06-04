@@ -110,6 +110,15 @@ class Hashmap {
     return this.size
   }
 
+  // Remove all entries
+  clear() {
+    while (this.buckets.length > 0) {
+      // console.log(this.buckets.length)
+      this.buckets.pop()
+    }
+    this.size = 0
+  }
+
   // Print entries
   entries() {
     console.log('Entries: ', this.buckets)
@@ -126,4 +135,11 @@ test.set('Sita', 'white')
 test.entries()
 // console.log(test.remove('banana'))
 // test.entries()
-console.log(test.length())
+// console.log(test.length())
+// test.clear()
+// console.log(test.length())
+// test.entries()
+// test.set('apple', 'red')
+// test.set('banana', 'yellow')
+// test.set('carrot', 'orange')
+// test.entries()
