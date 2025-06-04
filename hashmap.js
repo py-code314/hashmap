@@ -20,12 +20,22 @@ class Hashmap {
     return hashCode
   }
 
+  // Get a bucket based on key
   bucket(key) {
     const index = this.hash(key)
     console.log(index)
     return this.buckets[index]
   }
 
+  // Return entry based on key
+  entry(bucket, key) {
+    for (let item of bucket) {
+      if (item.key === key) {
+        return item
+      }
+    }
+    return null
+  }
 }
 
 const test = new Hashmap()
