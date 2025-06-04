@@ -24,6 +24,10 @@ class Hashmap {
   getBucket(key) {
     const index = this.hash(key)
     // console.log(index)
+    if (index < 0 || index >= this.capacity) {
+      throw new Error('Trying to access index out of bounds')
+    }
+    
     return this.buckets[index]
   }
 
@@ -39,12 +43,13 @@ class Hashmap {
 
   // Add or update an entry
   set(key, value) {
-    const index = this.hash(key)
-    // console.log('Index: ', index)
+    
     const bucket = this.getBucket(key)
     // console.log('Bucket: ', bucket)
 
     if (bucket === undefined) {
+      const index = this.hash(key)
+      // console.log('Index: ', index)
       this.buckets[index] = [[key, value]]
     } else {
       const entry = this.getEntry(bucket, key)
@@ -59,6 +64,21 @@ class Hashmap {
     }
   }
 
+  // Get the value of an entry
+  get(key) {
+    const bucket = this.getBucket(key)
+    // console.log('Bucket: ', bucket)
+    const entry = this.getEntry(bucket, key)
+    // console.log('Entry: ', entry)
+
+    if (entry) {
+      return entry[1]
+    }
+    return null
+  }
+
+  
+
   // Print entries
   entries() {
     console.log('Entries: ', this.buckets)
@@ -69,7 +89,8 @@ const test = new Hashmap()
 test.set('apple', 'red')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
-test.set('apple', 'green')
+// test.set('apple', 'green')
 test.set('Rama', 'blue')
 test.set('Sita', 'white')
 test.entries()
+console.log(test.get('avocado'))
