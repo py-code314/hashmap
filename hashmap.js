@@ -21,27 +21,38 @@ class Hashmap {
   }
 
   // Get a bucket based on key
-  bucket(key) {
+  getBucket(key) {
     const index = this.hash(key)
     console.log(index)
     return this.buckets[index]
   }
 
   // Return entry based on key
-  entry(bucket, key) {
-    for (let item of bucket) {
-      if (item.key === key) {
-        return item
+  getEntry(bucket, key) {
+    for (let entry of bucket) {
+      if (entry.key === key) {
+        return entry
       }
     }
     return null
   }
+
+  // Add or update an entry
+  set(key, value) {
+    const bucket = this.getBucket(key)
+    const entry = this.getEntry(bucket, key)
+    if (entry) {
+      entry.value = value
+    }
+    this.buckets.push([key, value])
+
+  }
 }
 
 const test = new Hashmap()
-test.bucket('dfdkfreireorjfd')
-test.bucket('sarah')
-test.bucket('Rama')
-test.bucket('Sita')
-test.bucket('firstKey')
-test.bucket('visualstudiocode')
+// test.bucket('dfdkfreireorjfd')
+// test.bucket('sarah')
+// test.bucket('Rama')
+// test.bucket('Sita')
+// test.bucket('firstKey')
+// test.bucket('visualstudiocode')
