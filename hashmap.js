@@ -86,7 +86,20 @@ class Hashmap {
     }
   }
 
-  
+  // Remove an entry
+  remove(key) {
+    const bucket = this.getBucket(key)
+    const entry = this.getEntry(bucket, key)
+
+    if (entry) {
+      const index = bucket.indexOf(entry)
+      console.log('Entry Index: ', index)
+      bucket.splice(index, 1)
+      return true
+    } else {
+      return false
+    }
+  }
 
   // Print entries
   entries() {
@@ -102,6 +115,5 @@ test.set('carrot', 'orange')
 test.set('Rama', 'blue')
 test.set('Sita', 'white')
 test.entries()
-console.log(test.has('avocado'))
-console.log(test.has('carrot'))
-console.log(test.has('apple'))
+console.log(test.remove('avocado'))
+test.entries()
