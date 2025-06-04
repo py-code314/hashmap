@@ -1,6 +1,7 @@
 // Hashmap class
 class Hashmap {
   constructor() {
+    this.buckets = []
     this.loadFactor = 0.75
     this.capacity = 16
   }
@@ -15,13 +16,22 @@ class Hashmap {
       hashCode = hashCode % this.capacity
     }
 
-    console.log(hashCode)
+    // console.log(hashCode)
     return hashCode
   }
+
+  bucket(key) {
+    const index = this.hash(key)
+    console.log(index)
+    return this.buckets[index]
+  }
+
 }
 
 const test = new Hashmap()
-test.hash('dfdkfreireorjfd')
-test.hash('sarah')
-test.hash('firstKey')
-test.hash('visualstudiocode')
+test.bucket('dfdkfreireorjfd')
+test.bucket('sarah')
+test.bucket('Rama')
+test.bucket('Sita')
+test.bucket('firstKey')
+test.bucket('visualstudiocode')
