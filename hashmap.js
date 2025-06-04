@@ -4,6 +4,7 @@ class Hashmap {
     this.buckets = []
     this.loadFactor = 0.75
     this.capacity = 16
+    this.size = 0
   }
 
   // Hash function
@@ -50,6 +51,7 @@ class Hashmap {
       const index = this.hash(key)
       // console.log('Index: ', index)
       this.buckets[index] = [[key, value]]
+      this.size++
     } else {
       const entry = this.getEntry(bucket, key)
       // console.log('Entry: ', entry)
@@ -59,6 +61,7 @@ class Hashmap {
         }
       } else {
         bucket.push([key, value])
+        this.size++
       }
     }
   }
@@ -93,12 +96,18 @@ class Hashmap {
 
     if (entry) {
       const index = bucket.indexOf(entry)
-      console.log('Entry Index: ', index)
+      // console.log('Entry Index: ', index)
       bucket.splice(index, 1)
+      this.size--
       return true
     } else {
       return false
     }
+  }
+
+  // Return total number of keys
+  length() {
+    return this.size
   }
 
   // Print entries
@@ -115,5 +124,6 @@ test.set('carrot', 'orange')
 test.set('Rama', 'blue')
 test.set('Sita', 'white')
 test.entries()
-console.log(test.remove('avocado'))
-test.entries()
+// console.log(test.remove('banana'))
+// test.entries()
+console.log(test.length())
