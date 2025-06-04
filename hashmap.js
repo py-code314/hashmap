@@ -23,15 +23,15 @@ class Hashmap {
   // Get a bucket based on key
   getBucket(key) {
     const index = this.hash(key)
-    console.log(index)
+    // console.log(index)
     return this.buckets[index]
   }
 
   // Return entry based on key
   getEntry(bucket, key) {
-    for (let entry of bucket) {
-      if (entry.key === key) {
-        return entry
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        return bucket[i]
       }
     }
     return null
@@ -39,20 +39,37 @@ class Hashmap {
 
   // Add or update an entry
   set(key, value) {
+    const index = this.hash(key)
+    // console.log('Index: ', index)
     const bucket = this.getBucket(key)
-    const entry = this.getEntry(bucket, key)
-    if (entry) {
-      entry.value = value
-    }
-    this.buckets.push([key, value])
+    // console.log('Bucket: ', bucket)
 
+    if (bucket === undefined) {
+      this.buckets[index] = [[key, value]]
+    } else {
+      const entry = this.getEntry(bucket, key)
+      // console.log('Entry: ', entry)
+      if (entry) {
+        if (entry[0] === key) {
+          entry[1] = value
+        }
+      } else {
+        bucket.push([key, value])
+      }
+    }
+  }
+
+  // Print entries
+  entries() {
+    console.log('Entries: ', this.buckets)
   }
 }
 
 const test = new Hashmap()
-// test.bucket('dfdkfreireorjfd')
-// test.bucket('sarah')
-// test.bucket('Rama')
-// test.bucket('Sita')
-// test.bucket('firstKey')
-// test.bucket('visualstudiocode')
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('apple', 'green')
+test.set('Rama', 'blue')
+test.set('Sita', 'white')
+test.entries()
