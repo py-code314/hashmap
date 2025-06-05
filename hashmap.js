@@ -128,6 +128,16 @@ class Hashmap {
     console.log(keysArray)
   }
 
+
+  // Return an array of values
+  values() {
+    const valuesArray = []
+    this.buckets.forEach((bucket) => {
+      bucket.forEach(entry => valuesArray.push(entry[1]))
+    })
+    console.log(valuesArray)
+  }
+
   // Print entries
   entries() {
     console.log('Entries: ', this.buckets)
@@ -142,4 +152,4 @@ test.set('carrot', 'orange')
 test.set('Rama', 'blue')
 test.set('Sita', 'white')
 // test.entries()
-test.keys()
+test.values()
