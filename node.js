@@ -5,3 +5,7 @@ export default class Node {
     this.next = next
   }
 }
+
+// const n1 = new Node('apple', 'red')
+// const n2 = new Node('hat', 'black')
+// console.log(n1)
