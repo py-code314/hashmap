@@ -119,6 +119,15 @@ class Hashmap {
     this.size = 0
   }
 
+  // Return an array of keys
+  keys() {
+    const keysArray = []
+    this.buckets.forEach((bucket) => {
+      bucket.forEach(entry => keysArray.push(entry[0]))
+    })
+    console.log(keysArray)
+  }
+
   // Print entries
   entries() {
     console.log('Entries: ', this.buckets)
@@ -132,14 +141,5 @@ test.set('carrot', 'orange')
 // test.set('apple', 'green')
 test.set('Rama', 'blue')
 test.set('Sita', 'white')
-test.entries()
-// console.log(test.remove('banana'))
 // test.entries()
-// console.log(test.length())
-// test.clear()
-// console.log(test.length())
-// test.entries()
-// test.set('apple', 'red')
-// test.set('banana', 'yellow')
-// test.set('carrot', 'orange')
-// test.entries()
+test.keys()
