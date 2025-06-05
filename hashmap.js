@@ -5,6 +5,8 @@ class Hashmap {
     this.loadFactor = 0.75
     this.capacity = 16
     this.size = 0
+
+    
   }
 
   // Hash function
@@ -64,11 +66,18 @@ class Hashmap {
         this.size++
       }
     }
+
+    // Check for total number of entries
+    const entriesLimit = this.loadFactor * this.capacity
+    if (this.size > entriesLimit) {
+      this.resize()
+    }
   }
 
   // Get the value of an entry
   get(key) {
     const bucket = this.getBucket(key)
+    //TODO: what if there is no bucket
     const entry = this.getEntry(bucket, key)
 
     if (entry) {
@@ -141,14 +150,40 @@ class Hashmap {
   entries() {
     return this.buckets
   }
+
+  // Increase the number of buckets
+  resize() {
+    const allEntries = this.entries()
+    const newCapacity = this.capacity * 2
+    this.capacity = newCapacity
+    const newSize = 0
+    this.size = newSize
+    const newBuckets = []
+    this.buckets = newBuckets
+    
+    allEntries.forEach((bucket) => {
+      bucket.forEach(entry => this.set(entry[0], entry[1]))
+    })
+  }
 }
 
 const test = new Hashmap()
 test.set('apple', 'red')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
-// test.set('apple', 'green')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
+
 test.set('Rama', 'blue')
-test.set('Sita', 'white')
+// test.set('Sita', 'white')
 console.log(test.entries())
-test.values()
+// test.values()
+console.log(test.size)
+console.log(test.capacity)
