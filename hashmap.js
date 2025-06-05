@@ -123,24 +123,23 @@ class Hashmap {
   keys() {
     const keysArray = []
     this.buckets.forEach((bucket) => {
-      bucket.forEach(entry => keysArray.push(entry[0]))
+      bucket.forEach((entry) => keysArray.push(entry[0]))
     })
-    console.log(keysArray)
+    return keysArray
   }
-
 
   // Return an array of values
   values() {
     const valuesArray = []
     this.buckets.forEach((bucket) => {
-      bucket.forEach(entry => valuesArray.push(entry[1]))
+      bucket.forEach((entry) => valuesArray.push(entry[1]))
     })
-    console.log(valuesArray)
+    return valuesArray
   }
 
-  // Print entries
+  // Return entries array
   entries() {
-    console.log('Entries: ', this.buckets)
+    return this.buckets
   }
 }
 
@@ -151,5 +150,5 @@ test.set('carrot', 'orange')
 // test.set('apple', 'green')
 test.set('Rama', 'blue')
 test.set('Sita', 'white')
-// test.entries()
+console.log(test.entries())
 test.values()
