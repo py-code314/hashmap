@@ -71,16 +71,16 @@ class Hashmap {
   }
 
   // Get the value of an entry
-  // get(key) {
-  //   const bucket = this.getBucket(key)
-  //   //TODO: what if there is no bucket
-  //   const entry = this.getEntry(bucket, key)
+  get(key) {
+    const bucket = this.getBucket(key)
 
-  //   if (entry) {
-  //     return entry[1]
-  //   }
-  //   return null
-  // }
+    if (bucket) {
+      const entry = this.getEntry(bucket, key)
+      console.log(entry)
+      return entry.value
+    }
+    return null
+  }
 
   // Return true or false given a key
   // has(key) {
@@ -169,8 +169,9 @@ test.set('apple', 'red')
 // test.set('banana', 'yellow')
 // test.set('carrot', 'orange')
 // test.set('dog', 'brown')
-test.set('Rama', 30)
-test.set('Sita', 32)
+// test.set('Rama', 30)
+// test.set('Sita', 32)
 
 console.log('Entries:', test.entries())
-console.dir(test, { depth: null })
+// console.dir(test, { depth: null })
+console.log(test.get('apple'))
