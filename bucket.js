@@ -59,12 +59,11 @@ export default class Bucket {
       currentNode = currentNode.next
     }
   }
+
+  // Remove all entries
+  clearNodes() {
+    this.headNode = null
+    this.length = 0
+  }
 }
 
-// const bucket = new Bucket()
-// bucket.append('apple', 'red')
-// bucket.append('banana', 'yellow')
-// bucket.append('carrot', 'orange')
-// bucket.append('dog', 'brown')
-// // console.log(bucket)
-// console.log(bucket.getEntry('carrot'))

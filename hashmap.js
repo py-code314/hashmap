@@ -100,18 +100,6 @@ class Hashmap {
       return true
     }
     return false
-
-    
-
-    // if (entry) {
-    //   const index = bucket.indexOf(entry)
-    //   // console.log('Entry Index: ', index)
-    //   bucket.splice(index, 1)
-    //   this.size--
-    //   return true
-    // } else {
-    //   return false
-    // }
   }
 
   // Return total number of keys
@@ -120,13 +108,14 @@ class Hashmap {
   }
 
   // Remove all entries
-  // clear() {
-  //   while (this.buckets.length > 0) {
-  //     // console.log(this.buckets.length)
-  //     this.buckets.pop()
-  //   }
-  //   this.size = 0
-  // }
+  clear() {
+    for (let bucket of this.buckets) {
+      if (bucket) {
+        bucket.clearNodes()
+      }
+    }
+    this.size = 0
+  }
 
   // Return an array of keys
   // keys() {
@@ -176,7 +165,11 @@ test.set('apple', 'red')
 test.set('Rama', 30)
 test.set('Sita', 32)
 
-console.log(test.remove('Sita'))
+// console.log(test.remove('Sita'))
 // console.log('Entries:', test.entries())
 console.dir(test, { depth: null })
+console.log(test.length())
 // console.log(test.has('apple'))
+test.clear()
+console.dir(test, { depth: null })
+console.log(test.length())
