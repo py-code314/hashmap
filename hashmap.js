@@ -76,23 +76,20 @@ class Hashmap {
 
     if (bucket) {
       const entry = this.getEntry(bucket, key)
-      console.log(entry)
+
       return entry.value
     }
     return null
   }
 
   // Return true or false given a key
-  // has(key) {
-  //   const bucket = this.getBucket(key)
-  //   const entry = this.getEntry(bucket, key)
-
-  //   if (entry) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
+  has(key) {
+    const bucket = this.getBucket(key)
+    if (bucket) {
+      return true
+    }
+    return false
+  }
 
   // Remove an entry
   // remove(key) {
@@ -174,4 +171,4 @@ test.set('apple', 'red')
 
 console.log('Entries:', test.entries())
 // console.dir(test, { depth: null })
-console.log(test.get('apple'))
+console.log(test.has('apple'))
