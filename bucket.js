@@ -39,6 +39,26 @@ export default class Bucket {
       currentNode = currentNode.next
     }
   }
+
+  // Remove entry
+  removeNode(key) {
+    let currentNode = this.headNode
+    let previousNode
+
+    while (currentNode) {
+      if (currentNode.key === key) {
+        if (previousNode) {
+          previousNode.next = currentNode.next
+        } else {
+          this.headNode = currentNode.next
+        }
+        this.length--
+        return
+      }
+      previousNode = currentNode
+      currentNode = currentNode.next
+    }
+  }
 }
 
 // const bucket = new Bucket()

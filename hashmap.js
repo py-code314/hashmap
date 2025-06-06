@@ -92,20 +92,27 @@ class Hashmap {
   }
 
   // Remove an entry
-  // remove(key) {
-  //   const bucket = this.getBucket(key)
-  //   const entry = this.getEntry(bucket, key)
+  remove(key) {
+    const bucket = this.getBucket(key)
+    if (bucket) {
+      bucket.removeNode(key)
+      this.size--
+      return true
+    }
+    return false
 
-  //   if (entry) {
-  //     const index = bucket.indexOf(entry)
-  //     // console.log('Entry Index: ', index)
-  //     bucket.splice(index, 1)
-  //     this.size--
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
+    
+
+    // if (entry) {
+    //   const index = bucket.indexOf(entry)
+    //   // console.log('Entry Index: ', index)
+    //   bucket.splice(index, 1)
+    //   this.size--
+    //   return true
+    // } else {
+    //   return false
+    // }
+  }
 
   // Return total number of keys
   length() {
@@ -166,9 +173,10 @@ test.set('apple', 'red')
 // test.set('banana', 'yellow')
 // test.set('carrot', 'orange')
 // test.set('dog', 'brown')
-// test.set('Rama', 30)
-// test.set('Sita', 32)
+test.set('Rama', 30)
+test.set('Sita', 32)
 
-console.log('Entries:', test.entries())
-// console.dir(test, { depth: null })
-console.log(test.has('apple'))
+console.log(test.remove('Sita'))
+// console.log('Entries:', test.entries())
+console.dir(test, { depth: null })
+// console.log(test.has('apple'))
