@@ -10,25 +10,41 @@ export default class Bucket {
 
   // Add new node to the end
   append(key, value) {
-      const newNode = new Node(key, value)
-  
-      if (!this.headNode) {
-        this.headNode = newNode
-      } else {
-        let currentNode = this.headNode
-  
-        while (currentNode.next) {
-          currentNode = currentNode.next
-        }
-  
-        currentNode.next = newNode
+    const newNode = new Node(key, value)
+
+    if (!this.headNode) {
+      this.headNode = newNode
+    } else {
+      let currentNode = this.headNode
+
+      while (currentNode.next) {
+        currentNode = currentNode.next
       }
-  
-      this.length++
+
+      currentNode.next = newNode
     }
+
+    this.length++
+  }
+
+  // Find entry based on key
+  getNode(key) {
+    let currentNode = this.headNode
+
+    while (currentNode) {
+      if (currentNode.key === key) {
+        return currentNode
+      }
+
+      currentNode = currentNode.next
+    }
+  }
 }
 
-const bucket = new Bucket()
-bucket.append('apple', 'red')
-bucket.append('banana', 'yellow')
-console.log(bucket)
+// const bucket = new Bucket()
+// bucket.append('apple', 'red')
+// bucket.append('banana', 'yellow')
+// bucket.append('carrot', 'orange')
+// bucket.append('dog', 'brown')
+// // console.log(bucket)
+// console.log(bucket.getEntry('carrot'))
