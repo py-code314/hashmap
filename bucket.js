@@ -1,14 +1,15 @@
 // Import Node class
 import Node from './node.js'
 
-// Create a class to manage a bucket
+/* Creates a bucket including functions */
 export default class Bucket {
   constructor() {
     this.length = 0
     this.headNode = null
   }
 
-  // Add new node to the end
+
+  /* Add a new node with the given key and value to the end of the bucket */
   append(key, value) {
     const newNode = new Node(key, value)
 
@@ -27,7 +28,8 @@ export default class Bucket {
     this.length++
   }
 
-  // Find entry based on key
+
+  /* Get node data */
   getNode(key) {
     let currentNode = this.headNode
 
@@ -38,67 +40,78 @@ export default class Bucket {
 
       currentNode = currentNode.next
     }
+
+    return null
   }
 
-  // Remove entry
+
+  /* Remove the node with the given key from the bucket */
   removeNode(key) {
     let currentNode = this.headNode
-    let previousNode
+    let previousNode = null
 
-    while (currentNode) {
-      if (currentNode.key === key) {
-        if (previousNode) {
-          previousNode.next = currentNode.next
-        } else {
-          this.headNode = currentNode.next
-        }
-        this.length--
-        return
-      }
+    while (currentNode && currentNode.key !== key) {
       previousNode = currentNode
       currentNode = currentNode.next
     }
+
+    if (!currentNode) {
+      return
+    }
+
+    if (previousNode) {
+      previousNode.next = currentNode.next
+    } else {
+      this.headNode = currentNode.next
+    }
+
+    this.length--
   }
 
-  // Remove all entries
+
+  /* Clears all nodes from the bucket */
   clearNodes() {
     this.headNode = null
     this.length = 0
   }
 
-  // Get keys
+  /* Return an array of all keys in the bucket */
   getKeys() {
-    const keysArray = []
-    let currentNode = this.headNode
+    const keys = [];
+    let currentNode = this.headNode;
 
     while (currentNode) {
-      keysArray.push(currentNode.key)
-      currentNode = currentNode.next
+      keys.push(currentNode.key);
+      currentNode = currentNode.next;
     }
-    return keysArray
+    
+    return keys;
   }
 
-  // Get values
+
+  /* Return an array of all values in the bucket */
   getValues() {
-    const valuesArray = []
+    const values = []
     let currentNode = this.headNode
 
     while (currentNode) {
-      valuesArray.push(currentNode.value)
+      values.push(currentNode.value)
       currentNode = currentNode.next
     }
-    return valuesArray
+
+    return values
   }
 
-  // Get node data
+  /* Retrieve all nodes as an array of key-value pairs */
   getNodes() {
-    const nodesArray = []
-    let currentNode = this.headNode
+    const nodes = [];
+    let currentNode = this.headNode;
 
     while (currentNode) {
-      nodesArray.push([currentNode.key, currentNode.value])
-      currentNode = currentNode.next
+      nodes.push([currentNode.key, currentNode.value]);
+      currentNode = currentNode.next;
     }
-    return nodesArray
+    
+    return nodes;
   }
 }

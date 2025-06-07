@@ -1,6 +1,7 @@
+// Import Bucket class
 import Bucket from './bucket.js'
 
-// Hashmap class
+/* Hashmap class */
 class Hashmap {
   constructor() {
     this.buckets = []
@@ -9,11 +10,11 @@ class Hashmap {
     this.size = 0
   }
 
-  // Hash function
+  /* Hash function */
   hash(key) {
     let hashCode = 0
-
     const primeNumber = 31
+
     for (let i = 0; i < key.length; i++) {
       hashCode = primeNumber * hashCode + key.charCodeAt(i)
       hashCode = hashCode % this.capacity
@@ -22,7 +23,7 @@ class Hashmap {
     return hashCode
   }
 
-  // Get a bucket based on key
+  /* Get a bucket based on key */
   getBucket(key) {
     const index = this.hash(key)
 
@@ -33,18 +34,18 @@ class Hashmap {
     return this.buckets[index]
   }
 
-  // Return entry based on key
+  /* Retrieve an entry from a given bucket */
   getEntry(bucket, key) {
     const entry = bucket.getNode(key)
 
     return entry
   }
 
-  // Add or update an entry
+  /* Add or update an entry */
   set(key, value) {
     const bucket = this.getBucket(key)
 
-    if (bucket === undefined) {
+    if (!bucket) {
       const index = this.hash(key)
 
       this.buckets[index] = new Bucket()
@@ -63,26 +64,29 @@ class Hashmap {
       }
     }
 
-    // Check for total number of entries
     const entriesLimit = this.loadFactor * this.capacity
+
     if (this.size > entriesLimit) {
       this.resize()
     }
   }
 
-  // Get the value of an entry
+  /* Retrieve the value associated with a given key */
   get(key) {
     const bucket = this.getBucket(key)
 
     if (bucket) {
       const entry = this.getEntry(bucket, key)
 
-      return entry.value
+      if (entry) {
+        return entry.value
+      }
     }
+
     return null
   }
 
-  // Return true or false given a key
+  /* Check if a given key exists in the hashmap */
   has(key) {
     const bucket = this.getBucket(key)
     if (bucket) {
@@ -91,7 +95,7 @@ class Hashmap {
     return false
   }
 
-  // Remove an entry
+  /* Removes the entry associated with the given key from the hashmap */
   remove(key) {
     const bucket = this.getBucket(key)
     if (bucket) {
@@ -102,64 +106,62 @@ class Hashmap {
     return false
   }
 
-  // Return total number of keys
+  /* Return the total number of keys in the hashmap */
   length() {
     return this.size
   }
 
-  // Remove all entries
+  /* Remove all entries from the hashmap, resetting all buckets and size */
   clear() {
-    for (let bucket of this.buckets) {
+    this.buckets.forEach((bucket) => {
       if (bucket) {
         bucket.clearNodes()
       }
-    }
+    })
     this.size = 0
+    this.capacity = 16
   }
 
-  // Return an array of keys
+  /* Returns an array of all keys in the hashmap */
   keys() {
-    const keys = []
-    this.buckets.forEach((bucket) => {
-      const keysArray = bucket.getKeys()
-      keysArray.forEach(key => keys.push(key))
-    })
+    const keys = this.buckets.reduce(
+      (allKeys, bucket) => allKeys.concat(bucket.getKeys()),
+      []
+    )
     return keys
   }
 
   // Return an array of values
   values() {
-    const values = []
-    this.buckets.forEach((bucket) => {
-      const valuesArray = bucket.getValues()
-      valuesArray.forEach(value => values.push(value))
-    })
+    const values = this.buckets.reduce(
+      (allValues, bucket) => allValues.concat(bucket.getValues()),
+      []
+    )
     return values
   }
 
-  // Return entries array
+  /* Return an array of entries as key-value pairs
+   */
   entries() {
-    const entries = []
-    this.buckets.forEach(bucket => {
-      const nodesArray = bucket.getNodes()
-      nodesArray.forEach(entry => entries.push(entry))
-    })
+    const entries = this.buckets.reduce(
+      (allEntries, bucket) => allEntries.concat(bucket.getNodes()),
+      []
+    )
+
     return entries
   }
 
-  // Increase the number of buckets
+  /* Increase the number of buckets in the hashmap */
   resize() {
     const allEntries = this.entries()
-    const newCapacity = this.capacity * 2
-    this.capacity = newCapacity
-    const newSize = 0
-    this.size = newSize
+    const newNumBuckets = this.capacity * 2
+    this.capacity = newNumBuckets
     const newBuckets = []
     this.buckets = newBuckets
+    this.size = 0 // Reset the size to 0
 
-    allEntries.forEach((entry) => 
-      this.set(entry[0], entry[1])
-    )
+    // Rehash the indexes for buckets
+    allEntries.forEach(([key, value]) => this.set(key, value))
   }
 }
 
@@ -176,13 +178,20 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
+// test.set('appl', 'red')
+// test.set('banan', 'yellow')
+// test.set('carro', 'orange')
+// test.set('do', 'brown')
+// test.set('elephan', 'gray')
+// test.set('fro', 'green')
+// test.set('grap', 'purple')
+// test.set('ha', 'black')
+// test.set('ice crea', 'white')
+// test.set('jacke', 'blue')
+// test.set('kit', 'pink')
+// test.set('lio', 'golden')
 
 test.set('moon', 'silver')
 
-// console.log(test.remove('Sita'))
-// console.log('Entries:', test.entries())
-console.dir(test, { depth: null })
-// console.log(test.length())
-// console.log(test.has('apple'))
-// test.clear()
 // console.log(test.entries())
+console.dir(test, { depth: null })
