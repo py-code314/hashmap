@@ -139,38 +139,50 @@ class Hashmap {
 
   // Return entries array
   entries() {
-    return this.buckets
+    const entries = []
+    this.buckets.forEach(bucket => {
+      const nodesArray = bucket.getNodes()
+      nodesArray.forEach(entry => entries.push(entry))
+    })
+    return entries
   }
 
   // Increase the number of buckets
-  // resize() {
-  //   const allEntries = this.entries()
-  //   const newCapacity = this.capacity * 2
-  //   this.capacity = newCapacity
-  //   const newSize = 0
-  //   this.size = newSize
-  //   const newBuckets = []
-  //   this.buckets = newBuckets
+  resize() {
+    const allEntries = this.entries()
+    const newCapacity = this.capacity * 2
+    this.capacity = newCapacity
+    const newSize = 0
+    this.size = newSize
+    const newBuckets = []
+    this.buckets = newBuckets
 
-  //   allEntries.forEach((bucket) => {
-  //     bucket.forEach(entry => this.set(entry[0], entry[1]))
-  //   })
-  // }
+    allEntries.forEach((entry) => 
+      this.set(entry[0], entry[1])
+    )
+  }
 }
 
 const test = new Hashmap()
-// test.set('apple', 'red')
-test.set('apple', 'green')
+test.set('apple', 'red')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
 test.set('dog', 'brown')
-test.set('Rama', 30)
-test.set('Sita', 32)
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
+
+test.set('moon', 'silver')
 
 // console.log(test.remove('Sita'))
 // console.log('Entries:', test.entries())
-// console.dir(test, { depth: null })
+console.dir(test, { depth: null })
 // console.log(test.length())
 // console.log(test.has('apple'))
 // test.clear()
-console.log(test.values())
+// console.log(test.entries())

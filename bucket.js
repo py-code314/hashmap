@@ -66,7 +66,7 @@ export default class Bucket {
     this.length = 0
   }
 
-  // Get key
+  // Get keys
   getKeys() {
     const keysArray = []
     let currentNode = this.headNode
@@ -78,7 +78,7 @@ export default class Bucket {
     return keysArray
   }
 
-  // Get value
+  // Get values
   getValues() {
     const valuesArray = []
     let currentNode = this.headNode
@@ -88,5 +88,17 @@ export default class Bucket {
       currentNode = currentNode.next
     }
     return valuesArray
+  }
+
+  // Get node data
+  getNodes() {
+    const nodesArray = []
+    let currentNode = this.headNode
+
+    while (currentNode) {
+      nodesArray.push([currentNode.key, currentNode.value])
+      currentNode = currentNode.next
+    }
+    return nodesArray
   }
 }
