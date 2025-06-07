@@ -121,20 +121,21 @@ class Hashmap {
   keys() {
     const keys = []
     this.buckets.forEach((bucket) => {
-      const keysArray = bucket.getKey()
+      const keysArray = bucket.getKeys()
       keysArray.forEach(key => keys.push(key))
     })
     return keys
   }
 
   // Return an array of values
-  // values() {
-  //   const valuesArray = []
-  //   this.buckets.forEach((bucket) => {
-  //     bucket.forEach((entry) => valuesArray.push(entry[1]))
-  //   })
-  //   return valuesArray
-  // }
+  values() {
+    const values = []
+    this.buckets.forEach((bucket) => {
+      const valuesArray = bucket.getValues()
+      valuesArray.forEach(value => values.push(value))
+    })
+    return values
+  }
 
   // Return entries array
   entries() {
@@ -158,7 +159,7 @@ class Hashmap {
 }
 
 const test = new Hashmap()
-test.set('apple', 'red')
+// test.set('apple', 'red')
 test.set('apple', 'green')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
@@ -172,4 +173,4 @@ test.set('Sita', 32)
 // console.log(test.length())
 // console.log(test.has('apple'))
 // test.clear()
-console.log(test.keys())
+console.log(test.values())
