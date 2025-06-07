@@ -118,13 +118,14 @@ class Hashmap {
   }
 
   // Return an array of keys
-  // keys() {
-  //   const keysArray = []
-  //   this.buckets.forEach((bucket) => {
-  //     bucket.forEach((entry) => keysArray.push(entry[0]))
-  //   })
-  //   return keysArray
-  // }
+  keys() {
+    const keys = []
+    this.buckets.forEach((bucket) => {
+      const keysArray = bucket.getKey()
+      keysArray.forEach(key => keys.push(key))
+    })
+    return keys
+  }
 
   // Return an array of values
   // values() {
@@ -158,18 +159,17 @@ class Hashmap {
 
 const test = new Hashmap()
 test.set('apple', 'red')
-// test.set('apple', 'green')
-// test.set('banana', 'yellow')
-// test.set('carrot', 'orange')
-// test.set('dog', 'brown')
+test.set('apple', 'green')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
 test.set('Rama', 30)
 test.set('Sita', 32)
 
 // console.log(test.remove('Sita'))
 // console.log('Entries:', test.entries())
-console.dir(test, { depth: null })
-console.log(test.length())
+// console.dir(test, { depth: null })
+// console.log(test.length())
 // console.log(test.has('apple'))
-test.clear()
-console.dir(test, { depth: null })
-console.log(test.length())
+// test.clear()
+console.log(test.keys())

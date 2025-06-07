@@ -65,5 +65,18 @@ export default class Bucket {
     this.headNode = null
     this.length = 0
   }
+
+  // Get key
+  getKey() {
+    const keysArray = []
+    let currentNode = this.headNode
+
+    while (currentNode) {
+      keysArray.push(currentNode.key)
+      currentNode = currentNode.next
+    }
+    return keysArray
+    
+  }
 }
 
