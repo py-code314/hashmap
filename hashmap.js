@@ -151,7 +151,7 @@ class Hashmap {
     return entries
   }
 
-  /* Increase the number of buckets in the hashmap */
+  /* Double the number of buckets in the hashmap */
   resize() {
     const allEntries = this.entries()
     const newNumBuckets = this.capacity * 2
@@ -165,7 +165,9 @@ class Hashmap {
   }
 }
 
+// Create a new instance of the Hashmap class
 const test = new Hashmap()
+// Add some entries
 test.set('apple', 'red')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
@@ -178,20 +180,10 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
-// test.set('appl', 'red')
-// test.set('banan', 'yellow')
-// test.set('carro', 'orange')
-// test.set('do', 'brown')
-// test.set('elephan', 'gray')
-// test.set('fro', 'green')
-// test.set('grap', 'purple')
-// test.set('ha', 'black')
-// test.set('ice crea', 'white')
-// test.set('jacke', 'blue')
-// test.set('kit', 'pink')
-// test.set('lio', 'golden')
 
-test.set('moon', 'silver')
 
-// console.log(test.entries())
-console.dir(test, { depth: null })
+// test.set('moon', 'silver')
+
+// Print the entries
+console.log(test.entries())
+// console.dir(test, { depth: null })
