@@ -1,9 +1,9 @@
-# Project Hashmap solution for The Odin Project
+# Project: Hashmap solution for The Odin Project
 
 ## Overview
 This project is a simple implementation of a hash map using JavaScript. It is a part of the assignment for The Odin Project. The goal of this project is to practice creating and manipulating hash maps by calling the methods of the hash map class.
 
-List of methods included:
+### List of methods included:
 
 Helper methods:
 - `hash(key)`: Returns the hash value of the given key.
