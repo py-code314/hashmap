@@ -8,7 +8,7 @@ This project is a simple implementation of a hash map using JavaScript. It is a 
 Helper methods:
 - `hash(key)`: Returns the hash value of the given key.
 - `getBucket(key)`: Returns the bucket associated with the given key.
-- 'getEntry(bucket, key)': Returns the entry associated with the given key and bucket.
+- `getEntry(bucket, key)`: Returns the entry associated with the given key and bucket.
 
 Main methods:
 - `set(key, value)`: Adds a new key-value pair to the hash map.
